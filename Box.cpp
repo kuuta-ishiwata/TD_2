@@ -6,7 +6,6 @@
 
 
 
-
 Vector3 Box::GetWorldPosition() {
 	// ワールド座標を入れる変数
 	Vector3 worldPos;
@@ -45,8 +44,11 @@ void Box::Update()
 
 
 void Box::OnCollision() 
-{ worldtransform_.translation_.x -= 2.0f;
+{ 
+
+	worldtransform_.translation_.x -= 2.0f;
     
+
 }
 
 

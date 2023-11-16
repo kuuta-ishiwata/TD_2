@@ -91,12 +91,14 @@ void GameScene::Initialize() {
 }
 
 
-void GameScene::CheckAllCollisions() {
+void GameScene::CheckAllCollisions()
+{
 
 	
 	Vector3 PlayerPosition_, BoxPosition_;
 
 	PlayerPosition_ = player_->GetWorldPosition();
+
 	for (Box* BOXS : boxs_)
 	{
 		BoxPosition_ = BOXS->GetWorldPosition();
@@ -117,8 +119,9 @@ void GameScene::CheckAllCollisions() {
 		if (distance <= (radius * radius) + (radius * radius))
 		{
 
-			//BOXS->OnCollision();
+			BOXS->OnCollision();
 			player_->OnCollision();
+
 		}
 	}
 }

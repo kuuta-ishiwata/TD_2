@@ -101,10 +101,10 @@ void Player::Update()
 void Player::OnCollision()
 {
 	
-	if (flag == true) {
+	
 
 		worldtransform_.translation_.y -= acceleration.y;
-	}
+	
 
 	if (worldtransform_.translation_.y <= -20) 
 	{

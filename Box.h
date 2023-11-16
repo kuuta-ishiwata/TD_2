@@ -37,7 +37,6 @@ public:
 	void SetPlayer(Player* player) { player_ = player; }
 	
 
-
 private:
 
 
