@@ -45,11 +45,8 @@ void Box::Update()
 
 
 void Box::OnCollision() 
-{
-	 
+{ worldtransform_.translation_.x -= 2.0f;
     
-	 
-
 }
 
 
@@ -61,4 +58,5 @@ void Box::Draw(ViewProjection& viewprojection)
 	
 		model_->Draw(worldtransform_, viewprojection, BoxTextureHandle);
 	
+
 }

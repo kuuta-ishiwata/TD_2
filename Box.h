@@ -48,7 +48,7 @@ private:
 
 	GameScene* gameScene_ = nullptr;
 	Player* player_ = nullptr;
-
+	Box* box__ = nullptr;
 	
 
 	// デスフラグ

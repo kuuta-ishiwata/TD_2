@@ -78,7 +78,7 @@ void GameScene::CheckAllCollisions() {
 	{
 		BoxPosition_ = BOXS->GetWorldPosition();
 
-		float radius = 1.5f;
+		float radius = 0.5f;
 
 		float px;
 		float py;
@@ -95,6 +95,7 @@ void GameScene::CheckAllCollisions() {
 		{
 
 			BOXS->OnCollision();
+
 		}
 	}
 }

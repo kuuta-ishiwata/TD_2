@@ -35,7 +35,7 @@ void Player::Initialize(Model* model, uint32_t textureHandle,Vector3 Posiotn)
 	input_ = Input::GetInstance();
 	worldtransform_.translation_ = Posiotn;
 
-
+	
 }
 
 
@@ -46,10 +46,13 @@ void Player::Update()
 	
 	//const float Grabity = 0.5f; 
 	// 押した方向で移動ベクトルを変更
-
+	Vector3 acceleration = {0.8f, 0.5f, 0.5f};
 	
-
-	if (input_->PushKey(DIK_LEFT)) {
+	//worldtransform_.translation_.y += acceleration.y;
+    
+	
+		
+    if (input_->PushKey(DIK_LEFT)) {
 		move.x -= kCharacterSpeed.x;
 	} else if (input_->PushKey(DIK_RIGHT)) {
 		move.x += kCharacterSpeed.x;
@@ -59,6 +62,8 @@ void Player::Update()
 	} else if (input_->PushKey(DIK_DOWN)) {
 		move.y -= kCharacterSpeed.x;
 	}
+
+
 	XINPUT_STATE joyState;
 
 	if (Input::GetInstance()->GetJoystickState(0, joyState)) {
@@ -66,6 +71,7 @@ void Player::Update()
 		// 速さ
 		Vector3 speed = {0.2f,0.2f,0.2f};
 
+		//(float)joyState.Gamepad.bRightTrigger
 
 		// 移動量
 		move = {
@@ -75,6 +81,12 @@ void Player::Update()
 		Normalize(move);
 		Multiply2(move, speed);
 		
+		if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A)
+		{
+
+			worldtransform_.translation_.y += acceleration.x;
+
+		}
 		
 
 		worldtransform_.translation_ = Add(worldtransform_.translation_, move);
@@ -85,6 +97,8 @@ void Player::Update()
 
 
 	worldtransform_.UpdateMatrix();
+
+
 
 }
 
