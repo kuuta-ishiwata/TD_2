@@ -117,8 +117,8 @@ void GameScene::CheckAllCollisions() {
 		if (distance <= (radius * radius) + (radius * radius))
 		{
 
-			BOXS->OnCollision();
-
+			//BOXS->OnCollision();
+			player_->OnCollision();
 		}
 	}
 }

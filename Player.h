@@ -33,13 +33,16 @@ public:
 	 Vector3 PlayerSpeed() { return kCharacterSpeed; }
 	 Vector3 Playermove() { return moves; } 
   
+	 void OnCollision();
+
+
 private:
 
 	WorldTransform worldtransform_;
 	const ViewProjection* viewprojection_ = nullptr;
 	Model* model_ = nullptr;
 	Input* input_ = nullptr;
-
+	Vector3 acceleration = {0.8f, 20.0f, 0.5f};
 
 	uint32_t TextureHandle = 0;
 	Vector3 kCharacterSpeed = {0.1f, 0.1f, 0.1f};
