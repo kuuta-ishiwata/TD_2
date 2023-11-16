@@ -50,7 +50,8 @@
 
 void MapChip::Update() {
 
-	for (WorldTransform worldTransform : worldTransforms_) {
+	for (WorldTransform worldTransform : worldTransforms_) 
+	{
 		worldTransform.UpdateMatrix();
 	}
 }
