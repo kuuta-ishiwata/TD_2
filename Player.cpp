@@ -47,10 +47,17 @@ void Player::Update()
 	//const float Grabity = 0.5f; 
 	// 押した方向で移動ベクトルを変更
 	Vector3 acceleration = {0.8f, 0.5f, 0.5f};
+	if (flag == true) 
+	{
+
+		worldtransform_.translation_.y -= acceleration.y;
+
+	}
+	if (worldtransform_.translation_.y <= -20)
+	{
+		
 	
-	//worldtransform_.translation_.y += acceleration.y;
-    
-	
+	}
 		
     if (input_->PushKey(DIK_LEFT)) {
 		move.x -= kCharacterSpeed.x;
