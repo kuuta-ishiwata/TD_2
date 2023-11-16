@@ -15,6 +15,7 @@
 #include "Box.h"
 #include "Skydome.h"
 #include "FollowCamera.h"
+#include "MapChip.h"
 #include <sstream>
 
 
@@ -114,6 +115,17 @@ private:
 	
 	void BoxSpawn();
 	Vector3 Boxpositions_{5.0f, 0.0f, 5.0f};
+
+
+	// ステージ
+	uint32_t StageTextureHandle_ = 0;
+	Model* StageModel_ = nullptr;
+	MapChip* Stage_ = nullptr;
+
+	// 青のブロック
+	uint32_t BlueStageTextureHandle_ = 0;
+	Model* BlueStageModel_ = nullptr;
+	MapChip* BlueStage_ = nullptr;
 
 	/// <summary>
 	/// ゲームシーン用

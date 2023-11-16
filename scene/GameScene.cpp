@@ -12,6 +12,8 @@ GameScene::~GameScene()
 	delete model_;
 	delete modelSkydome_;
 	delete debugcamera_;
+	delete Stage_;
+	delete StageModel_;
 
 }
 
@@ -53,6 +55,27 @@ void GameScene::Initialize() {
 	followCamera_->SetTarget(&player_->GetWorldTransform());
 
 	player_->SetViewProjection(&followCamera_->GetViewProjection());
+
+
+	
+
+	#pragma region ステージ関係
+	// ステージ
+	StageTextureHandle_ = TextureManager::Load("black.png");
+	StageModel_ = Model::Create();
+
+	// 青ブロックのテクスチャ
+	BlueStageTextureHandle_ = TextureManager::Load("blue.png");
+	BlueStageModel_ = Model::Create();
+
+#pragma endregion
+
+#pragma region ブロック初期化
+	// 黒ブロック
+	Stage_ = new MapChip();
+	Stage_->Initialize(StageModel_, StageTextureHandle_, BlueStageModel_, BlueStageTextureHandle_);
+
+#pragma endregion
 
 
 	LoadBoxPopData();
@@ -137,6 +160,8 @@ void GameScene::Update() {
 	// 天球
 	skydome_->Update();
 
+	Stage_->Update();
+
 	BoxObjUpdate();
 	UpdateBoxPopCommands();
 
@@ -174,6 +199,10 @@ void GameScene::Draw() {
 	skydome_->Draw(viewprojection_);
 
 	//box_->Draw(viewprojection_);
+
+	// ステージ
+	Stage_->Draw(viewprojection_);
+
 
 	BoxObjDraw();
 
