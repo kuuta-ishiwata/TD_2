@@ -64,6 +64,7 @@ void GameScene::Initialize() {
 
 
 #pragma region ステージ関係
+
 	// ステージ
 	StageTextureHandle_ = TextureManager::Load("black.png");
 	StageModel_ = Model::Create();
@@ -130,20 +131,22 @@ void GameScene::CheckAllCollisions()
 	}
 
 
+
 	Vector3 JumpPosition_;
-	Vector3 JumpPlayer_;
 	
-	JumpPlayer_ =  player_->GetWorldPosition();
 	JumpPosition_ = jump_->GetWorldPosition();
+
+
 	float Radius = 0.5f;
 	float Jpx;
 	float Jpy;
 	float Jpz;
 	float distansposiiton;
 
-	Jpx = (JumpPosition_.x - JumpPlayer_.x) * (JumpPosition_.x - JumpPlayer_.x);
-	Jpy = (JumpPosition_.y - JumpPlayer_.y) * (JumpPosition_.y - JumpPlayer_.y);
-	Jpz = (JumpPosition_.z - JumpPlayer_.z) * (JumpPosition_.z - JumpPlayer_.z);
+
+	Jpx = (JumpPosition_.x - PlayerPosition_.x) * (JumpPosition_.x - PlayerPosition_.x);
+	Jpy = (JumpPosition_.y - PlayerPosition_.y) * (JumpPosition_.y - PlayerPosition_.y);
+	Jpz = (JumpPosition_.z - PlayerPosition_.z) * (JumpPosition_.z - PlayerPosition_.z);
 
 	distansposiiton = Jpx + Jpy + Jpz;
 
