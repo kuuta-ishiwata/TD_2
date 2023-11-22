@@ -35,6 +35,8 @@ public:
   
 	 void OnCollision();
 
+	 void JumpOnCollision();
+
 
 private:
 
@@ -42,13 +44,13 @@ private:
 	const ViewProjection* viewprojection_ = nullptr;
 	Model* model_ = nullptr;
 	Input* input_ = nullptr;
-	Vector3 acceleration = {0.8f, 10.0f, 0.5f};
+	Vector3 acceleration = {0.8f, 0.8f, 0.5f};
 
 	uint32_t TextureHandle = 0;
 	Vector3 kCharacterSpeed = {0.1f, 0.1f, 0.1f};
 	Vector3 moves = {0.0f, 0.0f, 0.0f};
 	bool flag = true;
-
+	bool  flag2 = true;
 
 
 };

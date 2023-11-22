@@ -24,6 +24,7 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 	TextureHandle = TextureManager::Load("ga.png");
 	BoxTextureHandle = TextureManager::Load("sample.png");
+	JumpTextureHnadle = TextureManager::Load("ga.png");
 
 	debugcamera_ = new DebugCamera(1280, 720);
 	debugcamera_->SetFarZ(1400.0f);
@@ -39,27 +40,30 @@ void GameScene::Initialize() {
 
 	box_ = new Box();
 
+	jump_ = new Jump();
+
 	player_->Initialize(model_, TextureHandle,{20.0f,0.0f,0.0f});
 	box_->Initialize(model_, BoxTextureHandle, {0.0f,0.0f,0.0f});
+	jump_->Initialize(model_, JumpTextureHnadle, { 5.0f, -20.0f, 10.0f });
 
 	//天球
-	modelSkydome_ = Model::CreateFromOBJ("skydome",true);
+	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
 	skydome_ = new Skydome();
 	skydome_->Initialize(modelSkydome_);
 
 	viewprojection_.farZ = 1400.0f;
 
+
 	// カメラ
 	followCamera_ = std::make_unique<FollowCamera>();
 	followCamera_->Initialize();
 	followCamera_->SetTarget(&player_->GetWorldTransform());
-
 	player_->SetViewProjection(&followCamera_->GetViewProjection());
 
 
-	
 
-	#pragma region ステージ関係
+
+#pragma region ステージ関係
 	// ステージ
 	StageTextureHandle_ = TextureManager::Load("black.png");
 	StageModel_ = Model::Create();
@@ -94,8 +98,8 @@ void GameScene::Initialize() {
 void GameScene::CheckAllCollisions()
 {
 
-	
 	Vector3 PlayerPosition_, BoxPosition_;
+	
 
 	PlayerPosition_ = player_->GetWorldPosition();
 
@@ -124,6 +128,31 @@ void GameScene::CheckAllCollisions()
 
 		}
 	}
+
+
+	Vector3 JumpPosition_;
+	Vector3 JumpPlayer_;
+	
+	JumpPlayer_ =  player_->GetWorldPosition();
+	JumpPosition_ = jump_->GetWorldPosition();
+	float Radius = 0.5f;
+	float Jpx;
+	float Jpy;
+	float Jpz;
+	float distansposiiton;
+
+	Jpx = (JumpPosition_.x - JumpPlayer_.x) * (JumpPosition_.x - JumpPlayer_.x);
+	Jpy = (JumpPosition_.y - JumpPlayer_.y) * (JumpPosition_.y - JumpPlayer_.y);
+	Jpz = (JumpPosition_.z - JumpPlayer_.z) * (JumpPosition_.z - JumpPlayer_.z);
+
+	distansposiiton = Jpx + Jpy + Jpz;
+
+	if (distansposiiton <= (Radius * Radius) + (Radius * Radius))
+	{
+		player_->JumpOnCollision();
+
+	}
+
 }
 
 
@@ -143,10 +172,9 @@ void GameScene::Update() {
 		debugCamera_->Update();
 		viewprojection_.matView = debugCamera_->GetViewProjection().matView;
 		viewprojection_.matProjection = debugCamera_->GetViewProjection().matProjection;
-
-
 		// ビュープロジェクション行列の転送
 		viewprojection_.TransferMatrix();
+
 
 	} else {
 		followCamera_->Update();
@@ -160,10 +188,14 @@ void GameScene::Update() {
 
 	box_->Update();
 
+
+	jump_->Update();
 	// 天球
 	skydome_->Update();
 
 	Stage_->Update();
+
+
 
 	BoxObjUpdate();
 	UpdateBoxPopCommands();
@@ -199,6 +231,8 @@ void GameScene::Draw() {
 
 	player_->Draw(viewprojection_);
 	
+	jump_->Draw(viewprojection_);
+
 	skydome_->Draw(viewprojection_);
 
 	//box_->Draw(viewprojection_);

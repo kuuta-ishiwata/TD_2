@@ -17,7 +17,7 @@
 #include "FollowCamera.h"
 #include "MapChip.h"
 #include <sstream>
-
+#include "Jump.h"
 
 /// <summary>
 /// ゲームシーン
@@ -78,17 +78,20 @@ private:
 
 	uint32_t TextureHandle = 0;
 	uint32_t BoxTextureHandle = 0;
+	uint32_t JumpTextureHnadle = 0;
+
 
 	Model* model_ = nullptr;
 
 	
 	Player* player_ = nullptr;
+	
 	Box* box_ = nullptr;
-
+	Jump* jump_ = nullptr;
 
 	Vector3 Positon = {0.0f,0.0f,0.0f};
 	Vector3 Boxposiiton = {0.0f, 0.0f, 0.0f};
-	
+	Vector3 JumpPosition = {0.0f, 0.0f, 0.0f};
 	
 	float inputFloat3[3] = {0, 0, 0};
 

@@ -94,22 +94,52 @@ void Player::Update()
 
 	worldtransform_.UpdateMatrix();
 
+	if (flag == false) 
+	{
+		worldtransform_.translation_.y -= acceleration.y;
+	}
 
+	if (worldtransform_.translation_.y <= -20) {
+		flag = true;
+	}
+
+	if (flag2 == false)
+	{
+		worldtransform_.translation_.y += acceleration.y;
+	}
+
+	if (worldtransform_.translation_.y == 0)
+	{
+		flag2 = true;
+	}
 
 }
 
 void Player::OnCollision()
 {
 	
+	flag = false;
+	
 	
 
-		worldtransform_.translation_.y -= acceleration.y;
+	//if (worldtransform_.translation_.y == -20)
+	//{
+	//	worldtransform_.translation_.x += 20;
+	//
+	//}
+
 	
 
-	if (worldtransform_.translation_.y <= -20) 
-	{
-		flag = false;
-	}
+}
+
+
+
+void Player::JumpOnCollision()
+{
+
+	//flag2 = false;
+	//worldtransform_.translation_.y += 20;
+	
 
 }
 

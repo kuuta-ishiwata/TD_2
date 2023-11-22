@@ -4,8 +4,10 @@
 #include <Xinput.h>
 
 void FollowCamera::Initialize() {
+
 	viewprojection_.Initialize();
 	viewprojection_.farZ = 1400.0f;
+
 }
 
 void FollowCamera::Update() {

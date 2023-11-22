@@ -22,9 +22,4 @@ private:
 	ViewProjection viewProjection_;
 
 
-
-
-
-
-
 };

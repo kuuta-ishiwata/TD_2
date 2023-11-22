@@ -112,6 +112,7 @@
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
+    <ClCompile Include="Jump.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapChip.cpp" />
     <ClCompile Include="MATHEX.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="Box.h" />
     <ClInclude Include="FollowCamera.h" />
     <ClInclude Include="input\Input.h" />
+    <ClInclude Include="Jump.h" />
     <ClInclude Include="MapChip.h" />
     <ClInclude Include="MATHEX.h" />
     <ClInclude Include="math\Matrix4x4.h" />
