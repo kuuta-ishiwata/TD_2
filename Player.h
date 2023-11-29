@@ -50,7 +50,7 @@ private:
 	Vector3 kCharacterSpeed = {0.1f, 0.1f, 0.1f};
 	Vector3 moves = {0.0f, 0.0f, 0.0f};
 	bool flag = true;
-	bool  flag2 = true;
+	bool flag2 = true;
 
 
 };

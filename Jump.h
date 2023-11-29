@@ -9,6 +9,8 @@
 #include <list>
 #include "Player.h"
 
+
+
 class Jump {
 
 
@@ -19,11 +21,11 @@ class Jump {
 
 	void Draw(ViewProjection& viewprojection);
 
-	void OnCollisiono();
-
-
+	
+   
 	Vector3 GetWorldPosition();
 
+	void OnCollision2();
 
 	private:
 	
@@ -34,7 +36,8 @@ class Jump {
 
 	   uint32_t JumpTextureHandle = 0;
 
-
+	   	//GameScene* gameScene_ = nullptr;
+	    Player* player_ = nullptr;
 
 
 

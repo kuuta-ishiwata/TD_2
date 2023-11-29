@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "Box.h"
 #include <fstream>
-
+#include "Jump.h"
 GameScene::GameScene() {}
 
 GameScene::~GameScene()
@@ -22,9 +22,9 @@ void GameScene::Initialize() {
 	dxCommon_ = DirectXCommon::GetInstance();
 	input_ = Input::GetInstance();
 	audio_ = Audio::GetInstance();
-	TextureHandle = TextureManager::Load("ga.png");
+	TextureHandle = TextureManager::Load("uvChecker.png");
 	BoxTextureHandle = TextureManager::Load("sample.png");
-	JumpTextureHnadle = TextureManager::Load("ga.png");
+	JumpTextureHnadle = TextureManager::Load("uvChecker.png");
 
 	debugcamera_ = new DebugCamera(1280, 720);
 	debugcamera_->SetFarZ(1400.0f);
@@ -32,9 +32,7 @@ void GameScene::Initialize() {
 	worldtransform_.Initialize();
 	viewprojection_.Initialize();
 
-
 	model_ = Model::Create();
-
 
 	player_ = new Player();
 
@@ -99,62 +97,83 @@ void GameScene::Initialize() {
 void GameScene::CheckAllCollisions()
 {
 
-	Vector3 PlayerPosition_, BoxPosition_;
+	Vector3 PlayerPosition_, BoxPosition_ ,JumpPosition_;
 	
-
 	PlayerPosition_ = player_->GetWorldPosition();
 
 	for (Box* BOXS : boxs_)
 	{
+
 		BoxPosition_ = BOXS->GetWorldPosition();
 
-		float radius = 0.5f;
-
+		float radius = 1.3f;
+		
 		float px;
 		float py;
 		float pz;
+		//float Rpx;
+		//float Rpy;
+		//float Rpz;
+
+
 		float distance;
+		//float Rdistance;
 
 		px = (BoxPosition_.x - PlayerPosition_.x) * (BoxPosition_.x - PlayerPosition_.x);
 		py = (BoxPosition_.y - PlayerPosition_.y) * (BoxPosition_.y - PlayerPosition_.y);
 		pz = (BoxPosition_.z - PlayerPosition_.z) * (BoxPosition_.z - PlayerPosition_.z);
 
-		distance = px + py + pz;
-
+		//Rpx = (BoxPosition_.x - PlayerPosition_.x) * (BoxPosition_.x  - PlayerPosition_.x);
+		//Rpy = (BoxPosition_.y - PlayerPosition_.y) * (BoxPosition_.y  - PlayerPosition_.y);
+		//Rpz = (BoxPosition_.z - PlayerPosition_.z) * (BoxPosition_.z  - PlayerPosition_.z);
+		
+        distance = px + py + pz;
+		//Rdistance = Rpx + Rpy + Rpz; 
+		
 		if (distance <= (radius * radius) + (radius * radius))
 		{
 
 			BOXS->OnCollision();
-			player_->OnCollision();
 
 		}
-	}
 
-
-
-	Vector3 JumpPosition_;
-	
-	JumpPosition_ = jump_->GetWorldPosition();
-
-
-	float Radius = 0.5f;
-	float Jpx;
-	float Jpy;
-	float Jpz;
-	float distansposiiton;
-
-
-	Jpx = (JumpPosition_.x - PlayerPosition_.x) * (JumpPosition_.x - PlayerPosition_.x);
-	Jpy = (JumpPosition_.y - PlayerPosition_.y) * (JumpPosition_.y - PlayerPosition_.y);
-	Jpz = (JumpPosition_.z - PlayerPosition_.z) * (JumpPosition_.z - PlayerPosition_.z);
-
-	distansposiiton = Jpx + Jpy + Jpz;
-
-	if (distansposiiton <= (Radius * Radius) + (Radius * Radius))
-	{
-		player_->JumpOnCollision();
+		//if (Rdistance <= (radius * radius) + (radius * radius))
+		//{
+		//
+		//	BOXS->OnCollision2();
+		//
+		//}
 
 	}
+
+
+	 for (Jump* jumps_ : Jumps_) 
+	 {
+
+		JumpPosition_ = jumps_->GetWorldPosition();
+
+		float radius = 1.0f;
+
+		float Rpx;
+		float Rpy;
+		float Rpz;
+
+		float Rdistance;
+
+		Rpx = (JumpPosition_.x - PlayerPosition_.x) * (JumpPosition_.x - PlayerPosition_.x);
+		Rpy = (JumpPosition_.y - PlayerPosition_.y) * (JumpPosition_.y - PlayerPosition_.y);
+		Rpz = (JumpPosition_.z - PlayerPosition_.z) * (JumpPosition_.z - PlayerPosition_.z);
+
+		Rdistance = Rpx + Rpy + Rpz;
+
+		if (Rdistance <= (radius * radius) + (radius * radius)) 
+		{
+
+			jumps_->OnCollision2();
+
+		}
+
+	 }
 
 }
 
@@ -164,6 +183,8 @@ void GameScene::Update() {
 	
 
 	CheckAllCollisions();
+
+	//CheakAllCollisions2();
 #ifdef _DEBUG
 
 	if (input_->TriggerKey(DIK_M)) {

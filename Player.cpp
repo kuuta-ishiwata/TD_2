@@ -94,41 +94,42 @@ void Player::Update()
 
 	worldtransform_.UpdateMatrix();
 
+
+
 	if (flag == false) 
 	{
 		worldtransform_.translation_.y -= acceleration.y;
 	}
 
-	if (worldtransform_.translation_.y <= -20) {
+	if (worldtransform_.translation_.y <= -19.5f) {
 		flag = true;
 	}
 
+	/*
 	if (flag2 == false)
 	{
+
 		worldtransform_.translation_.y += acceleration.y;
+
 	}
 
-	if (worldtransform_.translation_.y == 0)
+	if (worldtransform_.translation_.y <= 0)
 	{
-		flag2 = true;
-	}
 
+		flag2 = true;
+
+	}
+	*/
 }
 
 void Player::OnCollision()
 {
 	
-	flag = false;
-	
+	//flag = false;
 	
 
-	//if (worldtransform_.translation_.y == -20)
-	//{
-	//	worldtransform_.translation_.x += 20;
-	//
-	//}
+	worldtransform_.translation_ .y -= 10;
 
-	
 
 }
 

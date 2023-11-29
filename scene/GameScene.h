@@ -60,7 +60,7 @@ public: // メンバ関数
 	void BoxObjDraw();
 
     void CheckAllCollisions();
-
+	void CheakAllCollisions2();
   
 
 private:
@@ -114,7 +114,7 @@ private:
 	std::stringstream BoxPopCommands;
 
 	std::list<Box*> boxs_;
-
+	std::list<Jump*> Jumps_;
 	
 	void BoxSpawn();
 	Vector3 Boxpositions_{5.0f, 0.0f, 5.0f};

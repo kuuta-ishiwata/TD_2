@@ -25,7 +25,7 @@ public:
 
 	
 	void OnCollision();
-
+	void OnCollision2();
 	
 	bool IsDead() const { return isDead_; }
 	
@@ -49,6 +49,7 @@ private:
 	Player* player_ = nullptr;
 	Box* box__ = nullptr;
 	
+	Vector3 move = {0.3f, 0.2f, 0.2f};
 
 	// デスフラグ
 	bool isDead_ = false;

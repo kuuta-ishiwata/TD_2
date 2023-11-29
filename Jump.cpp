@@ -37,10 +37,9 @@ void Jump::Update()
 
 }
 
-void Jump::OnCollisiono()
+void ::Jump::OnCollision2()
 {
-
-	worldtransform_.translation_.x += 30;
+	worldtransform_.translation_.y -= 10;
 
 }
 

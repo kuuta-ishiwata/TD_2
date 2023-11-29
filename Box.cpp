@@ -46,11 +46,12 @@ void Box::Update()
 void Box::OnCollision() 
 { 
 
-	worldtransform_.translation_.x -= 2.0f;
-    
+      worldtransform_.translation_ .x+= move.x;
 
 }
 
+void Box::OnCollision2()
+{ worldtransform_.translation_.x -= move.x; }
 
 
 void Box::Draw(ViewProjection& viewprojection) 
